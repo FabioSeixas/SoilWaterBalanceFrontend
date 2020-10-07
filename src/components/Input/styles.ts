@@ -14,7 +14,6 @@ export const Container = styled.div<ContainerProps>`
   display: flex;
   align-items: center;
   border-radius: 5px;
-  max-width: 387px;
   color: #2c2826;
 
   & + div {
@@ -48,6 +47,7 @@ export const Container = styled.div<ContainerProps>`
     width: 100%;
     padding-left: 16px;
     background-color: #fff;
+    margin-right: 16px;
 
     &::placeholder {
       color: #bdb5b3;

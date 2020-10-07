@@ -1,7 +1,10 @@
 import React, { useCallback, useRef } from 'react';
+import { FiMail, FiLock } from 'react-icons/fi';
 import { Form } from '@unform/web';
 import { FormHandles } from '@unform/core';
 import * as Yup from 'yup';
+
+import getValidationError from '../../utils/getValidationError';
 
 import Logo from '../../assets/logo.png';
 
@@ -14,22 +17,22 @@ const SignIn: React.FC = () => {
 
   const handleSubmit = useCallback(async (data: object) => {
     formRef.current?.setErrors({});
-    console.log(data);
+
     try {
       const schema = Yup.object().shape({
         email: Yup.string()
           .required('Email is required')
           .email('Inform a valid email'),
-        password: Yup.string().min(
-          6,
-          'Password must have at least 6 characters',
-        ),
+        password: Yup.string().required('Password is required.'),
       });
 
       await schema.validate(data, {
         abortEarly: false,
       });
-    } catch (err) {}
+    } catch (err) {
+      const error = getValidationError(err);
+      formRef.current?.setErrors(error);
+    }
   }, []);
 
   return (
@@ -39,8 +42,13 @@ const SignIn: React.FC = () => {
         <h1>Sign In</h1>
 
         <Form ref={formRef} onSubmit={handleSubmit}>
-          <Input name="email" placeholder="E-mail" />
-          <Input name="password" type="password" placeholder="Password" />
+          <Input name="email" icon={FiMail} placeholder="E-mail" />
+          <Input
+            name="password"
+            icon={FiLock}
+            type="password"
+            placeholder="Password"
+          />
 
           <Button type="submit">SignIn</Button>
         </Form>
