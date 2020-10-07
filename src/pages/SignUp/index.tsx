@@ -2,6 +2,7 @@ import React, { useRef, useCallback } from 'react';
 import { Form } from '@unform/web';
 import { FormHandles } from '@unform/core';
 import * as Yup from 'yup';
+import { FiArrowLeft, FiUser, FiMail, FiLock } from 'react-icons/fi';
 
 import getValidationError from '../../utils/getValidationError';
 
@@ -44,12 +45,22 @@ const SignUp: React.FC = () => {
         <h1>Sign Up</h1>
 
         <Form ref={formRef} onSubmit={handleSubmit}>
-          <Input name="username" placeholder="Username" />
-          <Input name="email" placeholder="E-mail" />
-          <Input name="password" type="password" placeholder="Password" />
+          <Input name="username" icon={FiUser} placeholder="Username" />
+          <Input name="email" icon={FiMail} placeholder="E-mail" />
+          <Input
+            name="password"
+            icon={FiLock}
+            type="password"
+            placeholder="Password"
+          />
 
           <Button type="submit">Welcome</Button>
         </Form>
+
+        <a href="assad">
+          <FiArrowLeft />
+          Back to Home
+        </a>
       </Container>
     </>
   );
